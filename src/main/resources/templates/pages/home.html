@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="layouts/default :: head"></head>
+
+<body>
+<nav th:replace="layouts/default :: navbar"></nav>
+<section>
+    <div class="container">
+        <h1>Home page</h1>
+        <a href="/register">S'inscrire</a><br>
+        <a href="/login">Login</a>
+    </div>
+</section>
+<footer th:replace="layouts/default :: footer"></footer>
+</body>
+</html>
