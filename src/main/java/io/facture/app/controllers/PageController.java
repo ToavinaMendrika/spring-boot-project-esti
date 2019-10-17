@@ -1,11 +1,19 @@
 package io.facture.app.controllers;
 
+import io.facture.app.entities.User;
+import io.facture.app.services.UserService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
 public class PageController {
+
+    @Autowired
+    private UserService userService;
 
     @GetMapping("/")
     public String home(){
@@ -13,12 +21,15 @@ public class PageController {
     }
 
     @GetMapping("/admin/home")
-    public String adminHome()
+    public String adminHome(Authentication authentication, Model model)
     {
+        String username = authentication.getName();
+        User user = userService.findByEmail(username);
+        model.addAttribute("user", user);
         return "admin/home";
     }
 
-    @GetMapping(name="/403")
+    @GetMapping("/access-denied")
     public String forbidden()
     {
         return "pages/403";

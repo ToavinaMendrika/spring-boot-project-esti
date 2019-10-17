@@ -2,6 +2,7 @@ package io.facture.app.entities;
 
 import javax.persistence.*;
 import javax.validation.Valid;
+import javax.validation.constraints.NotBlank;
 import java.util.Date;
 
 @Entity
@@ -10,18 +11,32 @@ public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private int id;
+
+    @NotBlank(message = "le champ nom est requis")
     private String name;
+
+    @NotBlank(message = "le champ email est requis")
     private String email;
+
+    @NotBlank(message = "le champ mot de passe est requis")
     private String password;
+
+    @NotBlank(message = "le champ status est requis")
     private String status;
+
     private  String ceo;
+
+    @NotBlank(message = "le champ capital est requis")
     private String capital;
+
+    @NotBlank(message = "le champ siège social est requis")
     private String hq;
+
     private String activity;
     private Date created_at;
 
     @ManyToOne
-    @JoinColumn(name="role_id")
+    @JoinColumn(name="roles_id")
     private Role role;
 
     public int getId() {
@@ -103,4 +118,13 @@ public class User {
     public void setCreated_at(Date created_at) {
         this.created_at = created_at;
     }
+
+    public Role getRole() {
+        return role;
+    }
+
+    public void setRole(Role role) {
+        this.role = role;
+    }
+
 }
