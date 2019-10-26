@@ -4,6 +4,7 @@ import io.facture.app.entities.Role;
 import io.facture.app.entities.User;
 import io.facture.app.repositories.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -39,5 +40,12 @@ public class UserService {
         user.setRole(role);
         user.setCreated_at(new Date());
         userRepository.save(user);
+    }
+
+    public User getCurrentUser(Authentication authentication)
+    {
+        String username = authentication.getName();
+        User user = findByEmail(username);
+        return user;
     }
 }

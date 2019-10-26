@@ -3,6 +3,8 @@
 <head th:fragment="head">
     <title>Layout page</title>
     <link rel="stylesheet" href="/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css">
+
 </head>
 <body>
     <nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -17,19 +19,21 @@
                     <a class="nav-link" href="#">Home <span class="sr-only">(current)</span></a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="#">Features</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="#">Pricing</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link" href="#">About</a>
                 </li>
             </ul>
-            <form class="form-inline my-2 my-lg-0">
-                <input class="form-control mr-sm-2" type="text" placeholder="Search">
-                <button class="btn btn-secondary my-2 my-sm-0" type="submit">Search</button>
-            </form>
+
+            <ul class="navbar-nav my-2 mt-lg-2">
+                <li class="nav-item" th:if="${#authorization.getAuthentication().getName() == 'anonymousUser'} ">
+                    <a class="nav-link" href="/login" >Connexion</a>
+                </li>
+                <li class="nav-item" th:if="${#authorization.getAuthentication().getName() == 'anonymousUser'} ">
+                    <a class="nav-link" href="/register">Inscription</a>
+                </li>
+                <li class="nav-item" th:if="${#authorization.getAuthentication().getName() != 'anonymousUser'} ">
+                    <a class="nav-link" href="/logout">Logout</a>
+                </li>
+            </ul>
         </div>
     </nav>
     <section th:fragment="content">
@@ -40,5 +44,15 @@
             <p>My footer</p>
         </div>
     </footer>
+    <div th:fragment="script">
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+        <script src="/js/bootstrap.min.js"></script>
+        <script>
+            $(document).ready(function() {
+                $('#datatable').DataTable();
+            } );
+        </script>
+    </div>
 </body>
 </html>

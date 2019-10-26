@@ -3,13 +3,13 @@ package io.facture.app.entities;
 import javax.persistence.*;
 import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
-import java.util.Date;
+import java.util.*;
 
 @Entity
 @Table(name = "users")
 public class User {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
 
     @NotBlank(message = "le champ nom est requis")
@@ -38,6 +38,17 @@ public class User {
     @ManyToOne
     @JoinColumn(name="roles_id")
     private Role role;
+
+    @ManyToMany(
+            cascade = CascadeType.ALL,
+            fetch = FetchType.LAZY
+    )
+    @JoinTable(
+            name = "clients_users",
+            joinColumns = @JoinColumn(name="users_id"),
+            inverseJoinColumns = @JoinColumn(name = "clients_id")
+    )
+    private Set<Client> clients = new HashSet<>();
 
     public int getId() {
         return id;
@@ -127,4 +138,11 @@ public class User {
         this.role = role;
     }
 
+    public Set<Client> getClients() {
+        return clients;
+    }
+
+    public void setClients(Set<Client> clients) {
+        this.clients = clients;
+    }
 }

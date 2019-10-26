@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/default :: head"></head>
+<body>
+<nav th:replace="layouts/default :: navbar"></nav>
+<section style="margin-top: 15px">
+    <div class="container">
+        <h1 class="text-center">Ajout Facture</h1>
+        <p class="text-center" style="margin-bottom: 25px"><small>Formulaire Ajout Facture et ajout client</small></p>
+        <div class="row">
+            <div class="col-12">
+                <div class="card">
+                    <div class="card-header">
+                        <div class="row">
+                            <h3 class="col-10 text-left">Ajout client</h3>
+                            <p class="col-2"><a href="admin/invoice/add" class="btn btn-block btn-success">Liste clients</a></p>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                         <form autocomplete="off"  action="#" th:action="@{/admin/client/add}"
+                                 th:object="${client}" method="post"
+                                 role="form">
+
+                            <div class="form-group">
+                                <div class="form-group">
+                                    <div class="col-12">
+                                        <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                                               class="validation-message">Name Error</label>
+                                        <input type="text" th:field="*{name}" placeholder="Name"
+                                               class="form-control"/>
+                                    </div>
+                                </div>
+                            </div>
+                             <div class="form-group">
+                                 <div class="form-group">
+                                     <div class="col-12">
+                                         <label th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"
+                                                class="validation-message">Name Error</label>
+                                         <input type="text" th:field="*{lastname}" placeholder="Name"
+                                                class="form-control"/>
+                                     </div>
+                                 </div>
+                             </div>
+                             <div class="form-group">
+                                 <div class="col-12 ">
+                                     <button type="submit" class="btn btn-primary">Ajouter</button>
+                                 </div>
+                             </div>
+
+                        </form>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<div th:replace="layouts/default :: script"></div>
+</body>
+</html>

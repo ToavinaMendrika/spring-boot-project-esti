@@ -23,8 +23,7 @@ public class PageController {
     @GetMapping("/admin/home")
     public String adminHome(Authentication authentication, Model model)
     {
-        String username = authentication.getName();
-        User user = userService.findByEmail(username);
+        User user = userService.getCurrentUser(authentication);
         model.addAttribute("user", user);
         return "admin/home";
     }

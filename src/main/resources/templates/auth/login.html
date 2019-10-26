@@ -8,23 +8,50 @@
     <nav th:replace="layouts/default :: navbar"></nav>
     <section>
         <div class="container">
-            <img th:src="@{/images/login.jpg}" class="img-responsive center-block" width="300" height="300" alt="Logo"/>
-            <form th:action="@{/login}" method="POST" class="form-signin">
-                <h3 class="form-signin-heading" th:text="Welcome"></h3>
-                <br/>
+            <div class="row justify-content-center">
+                <div class="col-md-8">
+                    <div class="card">
+                        <div class="card-header">Se connecter</div>
+                        <div class="card-body">
+                            <div class="alert alert-danger" role="alert" align="center" th:if="${param.error}">
+                                Email ou mot de passe invalide, verifié votre identifiant
+                            </div>
+                            <form th:action="@{/login}" method="POST">
+                                <div class="form-group row">
+                                    <label for="email_address" class="col-md-4 col-form-label text-md-right">Email</label>
+                                    <div class="col-md-6">
+                                        <input type="text" id="email_address" class="form-control" name="email" required autofocus>
+                                    </div>
+                                </div>
 
-                <input type="text" id="email" name="email" th:placeholder="Email"
-                       class="form-control"/> <br/>
-                <input type="password" th:placeholder="Password"
-                       id="password" name="password" class="form-control"/> <br/>
+                                <div class="form-group row">
+                                    <label for="password" class="col-md-4 col-form-label text-md-right">Mot de passe</label>
+                                    <div class="col-md-6">
+                                        <input type="password" id="password" class="form-control" name="password" required>
+                                    </div>
+                                </div>
 
-                <div align="center" th:if="${param.error}">
-                    <p style="font-size: 20; color: #FF1C19;">Email or Password invalid, please verify</p>
+                                <div class="form-group row">
+                                    <div class="col-md-6 offset-md-4">
+                                        <div class="checkbox">
+                                            <label>
+                                                <input type="checkbox" name="remember"> Remember Me
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="col-md-6 offset-md-4">
+                                    <button type="submit" class="btn btn-primary">
+                                        Connexion
+                                    </button>
+                                </div>
+                        </form>
+                    </div>
                 </div>
-                <button class="btn btn-lg btn-primary btn-block" name="Submit" value="Login" type="Submit"
-                        th:text="Login"></button>
-            </form>
+            </div>
         </div>
     </section>
+    <div th:replace="layouts/default :: script"></div>
 </body>
 </html>
