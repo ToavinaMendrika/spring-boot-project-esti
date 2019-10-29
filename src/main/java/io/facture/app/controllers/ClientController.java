@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import javax.validation.Valid;
+import java.util.List;
 
 @Controller
 public class ClientController {
@@ -23,17 +24,18 @@ public class ClientController {
     @Autowired
     private UserService userService;
 
+
     @GetMapping("/admin/invoice/add")
-    public String createIndex(Client clientl){
+    public String createIndex(Client client, Authentication authentication, Model model){
+        User user = userService.getCurrentUser(authentication);
+        List<Client> clients = clientService.getUserClient(user);
+        model.addAttribute("clients", clients);
         return "admin/invoice/create";
     }
 
     @PostMapping(value = "/admin/client/add", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String createAction(@Valid Client client, Authentication authentication){
         User user = userService.getCurrentUser(authentication);
-        System.out.println("+++++++++++++++++++++++++++++++");
-        System.out.println("Client :" + client.getId());
-        System.out.println("+++++++++++++++++++++++++++++++");
         clientService.saveClient(client, user);
         return "redirect:/admin/invoice/add";
     }

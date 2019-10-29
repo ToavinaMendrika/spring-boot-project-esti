@@ -20,80 +20,88 @@
                                <div class="form-group">
                                    <div class="form-group">
                                        <div class="col-12">
-                                           <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
-                                                  class="validation-message">Name Error</label>
+
                                            <input type="text" th:field="*{name}" placeholder="Name"
-                                                  class="form-control"/>
+                                                  class="form-control" th:classappend="${#fields.hasErrors('name')} ? 'is-invalid' : 'is-normal'"/>
+                                           <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
+                                                  class="invalid-feedback">Name Error</label>
                                        </div>
                                    </div>
                                </div>
                                <div class="form-group">
                                    <div class="form-group">
                                        <div class="col-12">
-                                           <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
-                                                  class="validation-message"></label>
+
                                            <input type="email" th:field="*{email}" placeholder="Email"
-                                                  class="form-control"/>
+                                                  class="form-control" th:classappend="${#fields.hasErrors('email')} ? 'is-invalid' : 'is-normal'"/>
+                                           <label th:if="${#fields.hasErrors('email')}" th:errors="*{email}"
+                                                  class="invalid-feedback"></label>
                                        </div>
                                    </div>
                                </div>
                                <div class="form-group">
                                    <div class="form-group">
                                        <div class="col-12">
-                                           <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
-                                                  class="validation-message"></label>
+
                                            <input type="password" th:field="*{password}" placeholder="Password"
-                                                  class="form-control"/>
+                                                  class="form-control"  th:classappend="${#fields.hasErrors('password')} ? 'is-invalid' : 'is-normal'"/>
+                                           <label th:if="${#fields.hasErrors('password')}" th:errors="*{password}"
+                                                  class="invalid-feedback"></label>
                                        </div>
                                    </div>
                                </div>
                                <div class="form-group">
                                    <div class="form-group">
                                        <div class="col-12">
-                                           <label th:if="${#fields.hasErrors('status')}" th:errors="*{status}"
-                                                  class="validation-message"></label>
+
                                            <input type="text" th:field="*{status}" placeholder="Status"
-                                                  class="form-control"/>
+                                                  class="form-control" th:classappend="${#fields.hasErrors('status')} ? 'is-invalid' : 'is-normal'"/>
+                                           <label th:if="${#fields.hasErrors('status')}" th:errors="*{status}"
+                                                  class="invalid-feedback"></label>
                                        </div>
                                    </div>
                                </div>
                                <div class="form-group">
                                    <div class="form-group">
                                        <div class="col-12">
-                                           <label th:if="${#fields.hasErrors('ceo')}" th:errors="*{ceo}"
-                                                  class="validation-message"></label>
+
                                            <input type="text" th:field="*{ceo}" placeholder="Nom PDG"
-                                                  class="form-control"/>
+                                                  class="form-control"  th:classappend="${#fields.hasErrors('ceo')} ? 'is-invalid' : 'is-normal'"/>
+                                           <label th:if="${#fields.hasErrors('ceo')}" th:errors="*{ceo}"
+                                                  class="invalid-feedback"></label>
                                        </div>
                                    </div>
                                </div>
                                <div class="form-group">
                                    <div class="form-group">
                                        <div class="col-12">
-                                           <label th:if="${#fields.hasErrors('capital')}" th:errors="*{capital}"
-                                                  class="validation-message"></label>
+
                                            <input type="text" th:field="*{capital}" placeholder="Capital (Ar | Dollar | Euro)"
-                                                  class="form-control"/>
+                                                  class="form-control" th:classappend="${#fields.hasErrors('capital')} ? 'is-invalid' : 'is-normal'"/>
+                                           <label th:if="${#fields.hasErrors('capital')}" th:errors="*{capital}"
+                                                  class="invalid-feedback"></label>
                                        </div>
                                    </div>
                                </div>
                                <div class="form-group">
                                    <div class="form-group">
                                        <div class="col-12">
-                                           <label th:if="${#fields.hasErrors('hq')}" th:errors="*{hq}"
-                                                  class="validation-message"></label>
+
                                            <input type="text" th:field="*{hq}" placeholder="Siège"
-                                                  class="form-control"/>
+                                                  class="form-control" th:classappend="${#fields.hasErrors('hq')} ? 'is-invalid' : 'is-normal'"/>
+                                           <label th:if="${#fields.hasErrors('hq')}" th:errors="*{hq}"
+                                                  class="invalid-feedback"></label>
                                        </div>
                                    </div>
                                </div>
                                <div class="form-group">
                                    <div class="form-group">
                                        <div class="col-12">
-                                           <label th:if="${#fields.hasErrors('activity')}" th:errors="*{activity}"
-                                                  class="validation-message"></label>
+
                                            <input type="text" th:field="*{activity}" placeholder="Activité économique"
-                                                  class="form-control"/>
+                                                  class="form-control"  th:classappend="${#fields.hasErrors('activity')} ? 'is-invalid' : 'is-normal'"/>
+                                           <label th:if="${#fields.hasErrors('activity')}" th:errors="*{activity}"
+                                                  class="invalid-feedback"></label>
                                        </div>
                                    </div>
                                </div>
