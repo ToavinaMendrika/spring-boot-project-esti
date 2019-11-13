@@ -24,15 +24,6 @@ public class ClientController {
     @Autowired
     private UserService userService;
 
-
-    @GetMapping("/admin/invoice/add")
-    public String createIndex(Client client, Authentication authentication, Model model){
-        User user = userService.getCurrentUser(authentication);
-        List<Client> clients = clientService.getUserClient(user);
-        model.addAttribute("clients", clients);
-        return "admin/invoice/create";
-    }
-
     @PostMapping(value = "/admin/client/add", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public String createAction(@Valid Client client, Authentication authentication){
         User user = userService.getCurrentUser(authentication);

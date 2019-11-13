@@ -13,7 +13,7 @@ public class Client {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @Size(min = 3, message = "Nom ne doit être superieur à trois caractère")
     private String name;
@@ -36,11 +36,11 @@ public class Client {
     )
     private Set<User> users = new HashSet<>();
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 

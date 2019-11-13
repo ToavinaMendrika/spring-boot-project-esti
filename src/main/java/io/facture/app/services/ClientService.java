@@ -16,10 +16,10 @@ import java.util.List;
 public class ClientService {
 
     private ClientRepository clientRepository;
-    private EntityManager entityManager;
+
 
     @Autowired
-    public ClientService(ClientRepository clientRepository, EntityManager entityManager){
+    public ClientService(ClientRepository clientRepository){
         this.clientRepository = clientRepository;
     }
 

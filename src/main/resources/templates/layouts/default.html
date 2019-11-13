@@ -54,13 +54,21 @@
             $(document).ready(function() {
                 $('#datatable').DataTable();
                 $('.select2').select2();
+
+                $('.row td.products').each(function(){
+                    var product = $(this).data('products');
+                    $(this).text(product.gtotal);
+                })
                 var i=1;
-                $("#add_row").click(function(){b=i-1;
+                $("#add_row").click(function(e){
+                    b=i-1;
+                    e.preventDefault();
                     $('#addr'+i).html($('#addr'+b).html()).find('td:first-child').html(i+1);
                     $('#tab_logic').append('<tr id="addr'+(i+1)+'"></tr>');
                     i++;
                 });
-                $("#delete_row").click(function(){
+                $("#delete_row").click(function(e){
+                    e.preventDefault();
                     if(i>1){
                         $("#addr"+(i-1)).html('');
                         i--;
@@ -74,8 +82,9 @@
                 $('#tax').on('keyup change',function(){
                     calc_total();
                 });
-            } );
 
+
+            });
 
             function calc()
             {
@@ -92,8 +101,36 @@
                 });
             }
 
+            function rowToJson()
+            {
+                var JsonResult = {
+                    gtotal: 0,
+                    tax: 0,
+                    taxtAmount: 0,
+                    stotal: 0,
+                    products: []
+                };
+                $('#tab_logic tbody tr').each(function (element) {
+
+                    var product = $(this).find('.product').val();
+                    var qty = $(this).find('.qty').val();
+                    var price = $(this).find('.price').val();
+                    var total = $(this).find('.total').val();
+                    JsonResult.gtotal = $('#total_amount').val();
+                    JsonResult.tax = $('#tax').val();
+                    JsonResult.taxtAmount = $('#tax_amount').val();
+                    JsonResult.stotal = $('#sub_total').val();
+                    JsonResult.products.push({
+                        product, qty, price, total
+                    });
+                })
+                return JsonResult;
+            }
+
             function calc_total()
             {
+                var jsonProducts = JSON.stringify(rowToJson());
+                $('#products-json').val(jsonProducts);
                 total=0;
                 $('.total').each(function() {
                     total += parseInt($(this).val());
@@ -103,7 +140,6 @@
                 $('#tax_amount').val(tax_sum.toFixed(2));
                 $('#total_amount').val((tax_sum+total).toFixed(2));
             }
-
         </script>
     </div>
 </body>
