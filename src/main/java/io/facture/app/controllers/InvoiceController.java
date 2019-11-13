@@ -38,6 +38,8 @@ public class InvoiceController {
         User user = userService.getCurrentUser(authentication);
         List<Client> clients = clientService.getUserClient(user);
         model.addAttribute("clients", clients);
+        model.addAttribute("user", user);
+        model.addAttribute("now", new Date());
         return "admin/invoice/create";
     }
 
@@ -48,8 +50,8 @@ public class InvoiceController {
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss.SSS");
         String dateString = format.format( new Date());
         invoice.setIdentifier("invoice-"+user.getName()+"-"+dateString);
-        invoiceService.saveInvoice(invoice);
-        return "redirect:/admin/invoice/add";
+        Invoice invoiceSaved = invoiceService.saveInvoice(invoice);
+        return "redirect:/admin/invoice/"+ invoiceSaved.getId();
     }
 
     @GetMapping(value = "/admin/invoice/{id}/delete")
@@ -68,5 +70,21 @@ public class InvoiceController {
         }
 
         return "redirect:/admin/home";
+    }
+
+    @GetMapping(value = "/admin/invoice/{id}")
+    public String show(@PathVariable(value = "id") String id, Authentication authentication, Model model)
+    {
+        User user = userService.getCurrentUser(authentication);
+        Long invoiceId = Long.parseLong(id);
+        Invoice invoice = invoiceService.findInvoice(invoiceId);
+        if(invoice != null){
+            if(invoiceService.isOwnInvoice(invoice, user)){
+                model.addAttribute("invoice", invoice);
+                model.addAttribute("user", user);
+                return "admin/invoice/show";
+            }
+        }
+        return "redirect:/404";
     }
 }

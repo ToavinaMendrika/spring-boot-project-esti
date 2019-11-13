@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="fr" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org">
+<head th:replace="layouts/default :: head"></head>
+<body id="product-show-page">
+<nav th:replace="layouts/default :: navbar"></nav>
+<section style="margin-top: 15px">
+    <div class="container">
+        <h1 class="text-center">Facture</h1>
+        <p class="text-center" style="margin-bottom: 25px"><small th:text="${#dates.format(invoice.created_at, 'dd MMMM yyyy')}">Date</small></p>
+        <hr>
+        <div class="row">
+            <div class="col-sm-12">
+
+                <div class="row">
+                    <div class="col-6">
+                        <h3 th:text="${user.name} +' '+${user.status}">Société</h3>
+                        <address th:text="${user.hq}">Adresse</address>
+                        <p></p>
+                    </div>
+                    <div class="col-6">
+                        <p><b>Identifiant: </b><span th:text="${invoice.identifier}"></span></p>
+                        <br>
+                        <p th:text="${#dates.format(invoice.created_at, 'dd MMMM yyyy')}">Date: January 1, 2015</p>
+                        <p th:text="${invoice.client.name}+' '+${invoice.client.lastname}">Username lastname</p>
+                    </div>
+                </div>
+                <div class="row" id="products-show" th:attr="data-products=${invoice.products}">
+                    <div class="row col-12">
+                        <div class="col-md-12">
+                            <table class="table table-bordered table-hover" id="tab_logic">
+                                <thead>
+                                <tr>
+                                    <th class="text-center"> # </th>
+                                    <th class="text-center"> Produit </th>
+                                    <th class="text-center"> Qté </th>
+                                    <th class="text-center"> Prix </th>
+                                    <th class="text-center"> Total </th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                <tr id='addr0'>
+                                    <td>1</td>
+                                    <td>Produit1</td>
+                                    <td>12</td>
+                                    <td>3000</td>
+                                    <td>752000</td>
+                                </tr>
+                                <tr id='addr1'></tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                    <div class="row col-12">
+                        <div class="col-5 offset-7" style="margin-top:20px">
+                            <div class="pull-right">
+                                <table class="table table-bordered table-hover" id="tab_logic_total">
+                                    <tbody>
+                                    <tr>
+                                        <th class="text-center">Sous Total</th>
+                                        <td id="sub-total" class="text-center">1200</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center">TVA</th>
+                                        <td id="tax" class="text-center">20%</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center">Montant TVA</th>
+                                        <td id="tax-amount" class="text-center">3000</td>
+                                    </tr>
+                                    <tr>
+                                        <th class="text-center">Grand Total</th>
+                                        <td id="g-total" class="text-center">120000</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+    </div>
+</section>
+<div th:replace="layouts/default :: script"></div>
+</body>
+</html>

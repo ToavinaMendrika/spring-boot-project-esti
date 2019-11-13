@@ -1,7 +1,6 @@
 package io.facture.app.entities;
 
 import javax.persistence.*;
-import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 import java.util.*;
 
@@ -10,7 +9,7 @@ import java.util.*;
 public class User {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private int id;
+    private Long id;
 
     @NotBlank(message = "le champ nom est requis")
     private String name;
@@ -35,6 +34,8 @@ public class User {
     private String activity;
     private Date created_at;
 
+    private int enabled = 1;
+
     @ManyToOne
     @JoinColumn(name="roles_id")
     private Role role;
@@ -50,11 +51,11 @@ public class User {
     )
     private Set<Client> clients = new HashSet<>();
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -144,5 +145,13 @@ public class User {
 
     public void setClients(Set<Client> clients) {
         this.clients = clients;
+    }
+
+    public int getEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(int enabled) {
+        this.enabled = enabled;
     }
 }

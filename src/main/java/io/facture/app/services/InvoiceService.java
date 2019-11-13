@@ -25,9 +25,9 @@ public class InvoiceService {
         this.clientRepository = clientRepository;
     }
 
-    public void saveInvoice(Invoice invoice)
+    public Invoice saveInvoice(Invoice invoice)
     {
-        invoiceRepository.save(invoice);
+        return invoiceRepository.save(invoice);
     }
 
     public List<Invoice> getAllUserInvoice(User user)

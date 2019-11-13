@@ -22,6 +22,7 @@ public class Invoice {
     @Column(unique = true)
     private String identifier;
 
+    @Lob
     @NotBlank(message = "Le facture doit contenir des produits")
     private String products;
 

@@ -35,7 +35,7 @@
                                     <td th:attr="data-products=${invoice.products}" class="products"></td>
                                     <td th:text="${#dates.format(invoice.created_at, 'dd MMMM yyyy')}">dd/MMM/yyyy</td>
                                     <td>
-                                        <a href="" class="btn btn-outline-primary btn-sm">Voir</a>
+                                        <a th:href="'/admin/invoice/'+${invoice.id}" class="btn btn-outline-primary btn-sm">Voir</a>
                                         <a th:href="'/admin/invoice/'+${invoice.id}+'/delete'" class="btn btn-outline-danger btn-sm">Supprimer</a>
                                     </td>
                                 </tr>

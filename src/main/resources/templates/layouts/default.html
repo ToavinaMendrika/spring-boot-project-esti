@@ -57,8 +57,36 @@
 
                 $('.row td.products').each(function(){
                     var product = $(this).data('products');
-                    $(this).text(product.gtotal);
-                })
+                    var txt = '';
+                    product.products.forEach(function(element, index){
+                        if(index < 4 && element.product != undefined){
+                            txt += index == 0 ? element.product : ', ' +element.product;
+                        }
+                    });
+                    $(this).text(txt);
+                });
+               if($('#product-show-page').length != 0){
+                   var productShow = $('#products-show').data('products');
+                   if(productShow != undefined){
+
+                       $('#sub-total').text(productShow.stotal);
+                       $('#tax').text(productShow.tax + '%');
+                       $('#tax-amount').text(productShow.taxtAmount);
+                       $('#g-total').text(productShow.gtotal);
+                   }
+                   $('#tab_logic tbody').html('');
+                   productShow.products.forEach(function(value, index){
+                       //ajout tableau
+                       if(value.product != undefined){
+                           var $td = $(' <td>'+(index+1)+'</td>\n' +
+                               '<td>'+value.product+'</td>\n' +
+                               '<td>'+value.qty+'</td>\n' +
+                               '<td>'+value.price+'</td>\n' +
+                               '<td>'+value.total+'</td>');
+                           $('#tab_logic tbody').append('<tr id="addr'+(index+1)+'"></tr>').append($td);
+                       }
+                   });
+               }
                 var i=1;
                 $("#add_row").click(function(e){
                     b=i-1;

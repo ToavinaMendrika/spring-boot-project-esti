@@ -14,21 +14,20 @@
                 <form action="#" method="post" th:object="${invoice}" autocomplete="off"  th:action="@{/admin/invoice/add}">
                     <div class="row">
                         <div class="col-6">
-                            <h3>Société</h3>
-                            <address>Adresse</address>
+                            <h3 th:text="${user.name} +' '+${user.status}">Société</h3>
+                            <address th:text="${user.hq}">Adresse</address>
                             <p></p>
                         </div>
                         <div class="col-6">
                             <p>Facture</p>
                             <br>
-                            <p>Date: January 1, 2015</p>
+                            <p th:text="${#dates.format(now, 'dd MMMM yyyy')}">Date: January 1, 2015</p>
                             <div class="form-group">
                                 <select class="select2 form-control" th:field="*{client}">
                                     <option th:value="${null}">Selectionné nom du client</option>
                                     <option  th:each="cl : ${clients}" th:text="${cl.name} +' '+ ${cl.lastname}" th:value="${cl.id}">Client</option>
                                 </select>
                             </div>
-                            <p>Mail</p>
                         </div>
                     </div>
                     <div class="row">
@@ -114,7 +113,7 @@
                                     <div class="col-12">
                                         <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
                                                class="validation-message">Name Error</label>
-                                        <input type="text" th:field="*{name}" placeholder="Name"
+                                        <input type="text" th:field="*{name}" placeholder="Nom"
                                                class="form-control"/>
                                     </div>
                                 </div>
@@ -124,7 +123,7 @@
                                      <div class="col-12">
                                          <label th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"
                                                 class="validation-message">Name Error</label>
-                                         <input type="text" th:field="*{lastname}" placeholder="Name"
+                                         <input type="text" th:field="*{lastname}" placeholder="Prenom"
                                                 class="form-control"/>
                                      </div>
                                  </div>

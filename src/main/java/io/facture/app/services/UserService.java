@@ -30,7 +30,8 @@ public class UserService {
     public void saveUser(User user)
     {
         Role role = new Role();
-        role.setId(1);
+        Long id = Long.parseLong("1");
+        role.setId(id);
         user.setPassword(bCryptPasswordEncoder.encode(user.getPassword()));
         user.setEmail(user.getEmail());
         user.setName(user.getName());
