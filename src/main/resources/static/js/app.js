@@ -115,3 +115,21 @@ function calc_total()
     $('#tax_amount').val(tax_sum.toFixed(2));
     $('#total_amount').val((tax_sum+total).toFixed(2));
 }
+
+var invoiceMounth = $('#invoice-mounth').data('invoice-mounth');
+var countMounth = 0;
+invoiceMounth.forEach(function(invoice){
+    countMounth += parseFloat(invoice.gtotal);
+});
+$('#invoice-mounth').text(countMounth);
+
+function printDiv(divName) {
+    var printContents = document.getElementById(divName).innerHTML;
+    var originalContents = document.body.innerHTML;
+
+    document.body.innerHTML = printContents;
+
+    window.print();
+
+    document.body.innerHTML = originalContents;
+}

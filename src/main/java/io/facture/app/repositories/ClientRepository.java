@@ -10,4 +10,5 @@ import java.util.List;
 @Repository
 public interface ClientRepository extends JpaRepository<Client, Long> {
     List<Client> findByUsers(User user);
+    long countByUsers(User user);
 }

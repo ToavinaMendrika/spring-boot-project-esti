@@ -9,6 +9,11 @@
         <h1 class="text-center">Ajout Facture</h1>
         <p class="text-center" style="margin-bottom: 25px"><small>Formulaire Ajout Facture et ajout client</small></p>
         <hr>
+        <div class="alert alert-danger" role="alert" align="center" th:if="${param.error}">
+            <span th:if="${#fields.hasAnyErrors('client')}">Le facture doit être attibuer à un client</span>
+            <span th:if="${#fields.hasAnyErrors('products')}">Tous les champs sont requis</span>
+            <span th:case="*">Tous les champs sont requis</span>
+        </div>
         <div class="row">
             <div class="col-sm-12 col-md-9">
                 <form action="#" method="post" th:object="${invoice}" autocomplete="off"  th:action="@{/admin/invoice/add}">
@@ -23,7 +28,7 @@
                             <br>
                             <p th:text="${#dates.format(now, 'dd MMMM yyyy')}">Date: January 1, 2015</p>
                             <div class="form-group">
-                                <select class="select2 form-control" th:field="*{client}">
+                                <select class="select2 form-control" th:field="*{client}" required>
                                     <option th:value="${null}">Selectionné nom du client</option>
                                     <option  th:each="cl : ${clients}" th:text="${cl.name} +' '+ ${cl.lastname}" th:value="${cl.id}">Client</option>
                                 </select>
@@ -46,9 +51,9 @@
                                     <tbody>
                                     <tr id='addr0'>
                                         <td>1</td>
-                                        <td><input type="text" name='product[]'  placeholder='Enter Product Name' class="form-control product"/></td>
-                                        <td><input type="number" name='qty[]' placeholder='Enter Qty' class="form-control qty" step="0" min="0"/></td>
-                                        <td><input type="number" name='price[]' placeholder='Enter Unit Price' class="form-control price" step="0.00" min="0"/></td>
+                                        <td><input type="text" name='product[]'  placeholder='Enter Product Name' class="form-control product" required/></td>
+                                        <td><input type="number" name='qty[]' placeholder='Enter Qty' class="form-control qty" step="0" min="0" required/></td>
+                                        <td><input type="number" name='price[]' placeholder='Enter Unit Price' class="form-control price" step="0.00" min="0" required/></td>
                                         <td><input type="number"  name='total[]' placeholder='0.00' class="form-control total" readonly/></td>
                                     </tr>
                                     <tr id='addr1'></tr>
@@ -86,7 +91,7 @@
                                         </tr>
                                         </tbody>
                                     </table>
-                                    <input type="text"th:field="*{products}" id="products-json">
+                                    <input type="hidden" th:field="*{products}" id="products-json">
                                 </div>
                             </div>
                         </div>
@@ -114,7 +119,7 @@
                                         <label th:if="${#fields.hasErrors('name')}" th:errors="*{name}"
                                                class="validation-message">Name Error</label>
                                         <input type="text" th:field="*{name}" placeholder="Nom"
-                                               class="form-control"/>
+                                               class="form-control" required/>
                                     </div>
                                 </div>
                             </div>
@@ -124,7 +129,7 @@
                                          <label th:if="${#fields.hasErrors('lastname')}" th:errors="*{lastname}"
                                                 class="validation-message">Name Error</label>
                                          <input type="text" th:field="*{lastname}" placeholder="Prenom"
-                                                class="form-control"/>
+                                                class="form-control" required/>
                                      </div>
                                  </div>
                              </div>

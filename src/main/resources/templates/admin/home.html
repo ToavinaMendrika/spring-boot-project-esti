@@ -45,6 +45,38 @@
                     </div>
                 </div>
             </div>
+            <div class="row mt-5">
+                <div class="col-3">
+                    <div class="card">
+                        <div class="card-header">
+                            Nombre de client enregistrer
+                        </div>
+                        <div class="card-body">
+                            <h1 class="text-center" th:text="${countClient}"></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-header">
+                            Nombre de Facture enregistrer
+                        </div>
+                        <div class="card-body">
+                            <h1 class="text-center" th:text="${countInvoice}"></h1>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-5">
+                    <div class="card">
+                        <div class="card-header">
+                            Chiffre d'affaire en un mois
+                        </div>
+                        <div class="card-body">
+                           <h1 id="invoice-mounth" class="text-center" th:attr="data-invoice-mounth=${productsInOneMounth}"></h1>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </section>
     <div th:replace="layouts/default :: script"></div>

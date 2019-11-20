@@ -36,4 +36,9 @@ public class ClientService {
         clients = clientRepository.findByUsers(user);
         return clients;
     }
+
+    public Long countClient(User user)
+    {
+        return clientRepository.countByUsers(user);
+    }
 }

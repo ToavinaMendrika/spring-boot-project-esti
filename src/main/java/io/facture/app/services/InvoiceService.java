@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.time.OffsetDateTime;
 import java.util.List;
 
 @Service
@@ -52,5 +53,18 @@ public class InvoiceService {
     public boolean isOwnInvoice(Invoice invoice, User user)
     {
         return invoice.getClient().getUsers().contains(user);
+    }
+
+    public long countInvoice(User user)
+    {
+        return  invoiceRepository.countInvoiceByUser(user.getId());
+    }
+
+    public List<Invoice> getAllInvoiceInOneMounth(User user)
+    {
+        OffsetDateTime endDate = OffsetDateTime.now();
+        OffsetDateTime startDate = OffsetDateTime.now().minusDays(30);
+
+        return invoiceRepository.findInvoiceByUserInDate(startDate, endDate, user.getId());
     }
 }

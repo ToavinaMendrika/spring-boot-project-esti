@@ -6,6 +6,9 @@
 <nav th:replace="layouts/default :: navbar"></nav>
 <section style="margin-top: 15px">
     <div class="container">
+        <button class="btn btn-primary" onclick="printDiv('printableArea')">Imprimer</button>
+    </div>
+    <div class="container" id="printableArea">
         <h1 class="text-center">Facture</h1>
         <p class="text-center" style="margin-bottom: 25px"><small th:text="${#dates.format(invoice.created_at, 'dd MMMM yyyy')}">Date</small></p>
         <hr>

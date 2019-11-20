@@ -11,6 +11,7 @@ import org.springframework.http.MediaType;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,12 +45,19 @@ public class InvoiceController {
     }
 
     @PostMapping(value = "/admin/invoice/add", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
-    public String create(@Valid Invoice invoice, Authentication authentication)
+    public String create(@Valid Invoice invoice, Client client, BindingResult bindingResult, Authentication authentication, Model model)
     {
         User user = userService.getCurrentUser(authentication);
         SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd-HH:mm:ss.SSS");
         String dateString = format.format( new Date());
         invoice.setIdentifier("invoice-"+user.getName()+"-"+dateString);
+        if(bindingResult.hasErrors()){
+            List<Client> clients = clientService.getUserClient(user);
+            model.addAttribute("clients", clients);
+            model.addAttribute("user", user);
+            model.addAttribute("now", new Date());
+            return "admin/invoice/create";
+        }
         Invoice invoiceSaved = invoiceService.saveInvoice(invoice);
         return "redirect:/admin/invoice/"+ invoiceSaved.getId();
     }
